@@ -10,4 +10,4 @@ class Barber:
 
     def trim_mustache(self, mustahce: muv.Mustache):
         mustahce._mustache_lengt -= 5
-        mustahce.get_mustache_length()
+        print(f"mustache lenthg is now {mustahce.get_mustache_length()}")
