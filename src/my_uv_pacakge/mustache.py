@@ -1,8 +1,4 @@
-from turtle import color
-
-import
-
-class Mustache():
+class Mustache:
     def __init__(self):
         self.color = "black"
 
@@ -11,4 +7,4 @@ class Mustache():
         return self.color
 
     def color_mustache(self, color):
-        self.color
+        self.color = color
