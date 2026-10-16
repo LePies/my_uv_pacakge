@@ -20,3 +20,6 @@ build-backend = "uv_build"
 members = [
     "packages/barber",
 ]
+
+[tool.uv.build-backend]
+module-root = ""        # package sits at repo root (flat layout), not under src/
