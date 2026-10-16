@@ -1,0 +1,17 @@
+[project]
+name = "dev-scripts"
+version = "0.0.0"
+description = "Repo maintenance tooling (never published)"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+new-subpackage = "dev_scripts.new_subpackage:main"
+
+[build-system]
+requires = ["uv_build>=0.12.21,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "dev_scripts"
+module-root = ""
