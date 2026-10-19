@@ -20,10 +20,10 @@ class Mustache:
         self._mustache_lengt += 1
 
     def get_color(self):
-        return self.color
+        return self._color
 
     def color_mustache(self, color):
         if color not in self._allowed_colors:
             raise ValueError("What an absurd color for a mustache!")
 
-        self.color = color
+        self._color = color
