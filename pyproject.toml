@@ -21,3 +21,8 @@ members = ["packages/*", "dev"]
 
 [tool.uv.build-backend]
 module-root = ""        # package sits at repo root (flat layout), not under src/
+
+[dependency-groups]
+dev = [
+    "deptry>=0.25.1",
+]
