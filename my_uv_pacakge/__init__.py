@@ -1,15 +1,10 @@
-import importlib
 import sys
 
+# alias my_uv_pacakge.barber -> my_uv_pacakge.subpackages.barber
+import my_uv_pacakge.subpackages.barber as _barber
 from my_uv_pacakge.mustache import Mustache as Mustache
 
-__all__ = ['Mustache', 'barber', 'opt']
+sys.modules["my_uv_pacakge.barber"] = _barber
+barber = _barber
 
-# --- subpackage aliases (managed by dev/new_subpackage.py) ---
-
-for _name, _module in {'barber': 'barber', 'opt': 'opt'}.items():
-    _mod = importlib.import_module(f"my_uv_pacakge.{_module}")
-    sys.modules[f"my_uv_pacakge.{_name}"] = _mod
-    globals()[_name] = _mod
-
-# --- end managed block ---
+__all__ = ['Mustache', 'barber']
