@@ -1,4 +1,4 @@
-from barber.barber import Barber as Barber
+from .barber import Barber as Barber
 
 
 def main() -> None:
