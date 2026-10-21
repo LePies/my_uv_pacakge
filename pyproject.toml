@@ -24,5 +24,15 @@ module-root = ""        # package sits at repo root (flat layout), not under src
 
 [dependency-groups]
 dev = [
+    {include-group = "docs"},
     "deptry>=0.25.1",
+    "pytest>=9.1.1",
+    "ruff>=0.17.1",
+    "ty>=0.0.90",
+]
+docs = [
+    "furo>=2025.12.19",
+    "myst-parser>=5.1.0",
+    "sphinx>=9.2.0",
+    "sphinx-autoapi>=3.8.1",
 ]
