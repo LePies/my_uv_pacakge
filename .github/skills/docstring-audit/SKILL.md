@@ -1,7 +1,7 @@
 ---
-description: Audit all docstrings and create GitHub issues for problems found
+name: docstring-audit
+description: Audit all docstrings in the repo and create GitHub issues for missing, incorrect, or unclear documentation.
 ---
-
 Audit the documentation of this repository and file issues for what you find.
 
 ## Scope
