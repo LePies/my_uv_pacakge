@@ -1,0 +1,33 @@
+name: Docstring audit
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"   # every Monday 07:00 UTC
+  workflow_dispatch: {}     # also runnable manually from the Actions tab
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Copilot CLI docstring audit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx github-copilot-cli@latest \
+            --allow-all-tools \
+            --allow-all-permissions \
+            "Run the docstring-audit skill defined in \
+             .github/skills/docstring-audit/SKILL.md. Audit every Python \
+             file in my_uv_pacakge/ including subpackages. IMPORTANT: this \
+             runs unattended — do NOT ask for confirmation, directly create \
+             the GitHub issues per the skill's output format, with the \
+             'documentation' label. Before creating, check existing open \
+             issues and skip findings that already have an issue (match on \
+             the '[docs]:' title prefix)."
