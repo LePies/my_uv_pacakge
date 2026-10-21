@@ -2,8 +2,8 @@ name: Docstring audit
 
 on:
   schedule:
-    - cron: "0 7 * * 1"   # every Monday 07:00 UTC
-  workflow_dispatch: {}     # also runnable manually from the Actions tab
+    - cron: "0 7 * * 1"
+  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -13,21 +13,26 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Run Copilot CLI docstring audit
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'          # Copilot CLI requires Node 22+
+
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+
+      - name: Run docstring audit
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_PAT }}
         run: |
-          npx github-copilot-cli@latest \
+          copilot -s \
             --allow-all-tools \
-            --allow-all-permissions \
-            "Run the docstring-audit skill defined in \
-             .github/skills/docstring-audit/SKILL.md. Audit every Python \
-             file in my_uv_pacakge/ including subpackages. IMPORTANT: this \
-             runs unattended — do NOT ask for confirmation, directly create \
-             the GitHub issues per the skill's output format, with the \
-             'documentation' label. Before creating, check existing open \
-             issues and skip findings that already have an issue (match on \
-             the '[docs]:' title prefix)."
+            -p "Run the docstring-audit skill defined in \
+                .github/skills/docstring-audit/SKILL.md. Audit every Python \
+                file in my_uv_pacakge/ including subpackages. This runs \
+                unattended — do NOT ask for confirmation, directly create the \
+                GitHub issues per the skill's output format with the \
+                'documentation' label. Before creating, check existing open \
+                issues and skip findings that already have an issue (match on \
+                the '[docs]:' title prefix)."
