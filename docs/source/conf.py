@@ -30,4 +30,4 @@ exclude_patterns = []
 
 html_theme = 'furo'
 html_static_path = ['_static']
-autoapi_dirs = ['../my_uv_pacakge']
+autoapi_dirs = ["../../my_uv_pacakge"]
