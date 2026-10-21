@@ -14,7 +14,11 @@ release = '0.0.1'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["autoapu", "napoleon", "my_parser"]
+extensions = [
+    "autoapi.extension",
+    "sphinx.ext.napoleon",
+    "myst_parser",
+]
 
 templates_path = ['_templates']
 exclude_patterns = []
