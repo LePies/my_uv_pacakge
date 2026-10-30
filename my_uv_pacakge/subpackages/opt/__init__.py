@@ -2,4 +2,4 @@
 
 from .opt import Opt as Opt
 
-__all__ = ['Opt']
+__all__ = ["Opt"]

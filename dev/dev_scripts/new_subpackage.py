@@ -20,7 +20,7 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]          # repo root
+ROOT = Path(__file__).resolve().parents[2]  # repo root
 CORE_NAME = "my_uv_pacakge"
 SUBPACKAGES_DIR = ROOT / CORE_NAME / "subpackages"
 CORE_INIT = ROOT / CORE_NAME / "__init__.py"
@@ -55,6 +55,7 @@ __all__ = ["{main_class}"]
 
 
 def slug(name: str) -> str:
+    """Normalize a subpackage name to a valid Python identifier."""
     return name.strip().lower().replace("-", "_")
 
 
@@ -95,14 +96,6 @@ def update_core_init() -> None:
     else:
         text = text.rstrip() + "\n\n" + block + "\n"
 
-    # drop the old manual alias ceremony if present (superseded by the block)
-    text = re.sub(
-        r"import sys\n\n# alias my_uv_pacakge\.barber.*?\nbarber = _barber\n",
-        "",
-        text,
-        flags=re.DOTALL,
-    )
-
     # make sure the core's own import is at the top (before the aliases,
     # otherwise subpackages annotating with muv.Mustache hit a circular import)
     mustache_import = f"from {CORE_NAME}.mustache import Mustache as Mustache\n"
@@ -123,6 +116,7 @@ def update_core_init() -> None:
 
 
 def main() -> None:
+    """Scaffold a new subpackage and register it in the core __init__."""
     if len(sys.argv) < 2:
         sys.exit("usage: uv run new-subpackage <name> [attr1 attr2 ...]")
 
